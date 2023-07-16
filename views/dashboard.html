@@ -1,0 +1,28 @@
+<div ng-controller="DashboardCtrl">
+  <div class="row">
+    <div class="d-flex flex-column justify-content-start dashboard">
+      <a style="cursor:pointer;" ng-repeat="d in diary">
+        <div class="col-12 card d-flex flex-row">
+          <div class="card-avatar d-flex flex-column justify-content-start">
+            <div class="nickname nickname-author">
+
+              <b>{{d.user.name}}</b>
+
+              <p class="status">
+                Блогер
+              </p>
+
+            </div>
+            <img ng-if="!d.user.avatar" class="avatar" src="http://ufland.moy.su/camera_a.gif">
+            <img ng-if="d.user.avatar" class="avatar" ng-src="{{d.user.avatar}}">
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">{{d.name}}</h5>
+            <p class="card-text">{{d.description}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
