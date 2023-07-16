@@ -1,0 +1,41 @@
+<div ng-controller="DiaryCtrl">
+    <div class="row d-flex justify-content-center">
+        <div class="d-flex flex-column col-9 m-4 bg-light">
+            <h1 class="display-5 fw-bold">{{diary.p[0].diary.name}}</h1>
+            <p class="col-md-8 fs-4">{{diary.p[0].diary.description}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="d-flex flex-column justify-content-start">
+            <div ng-repeat="post in diary.p" class="col-12 card d-flex flex-row">
+                <div class="card-avatar d-flex flex-column justify-content-start">
+                    <div class="nickname nickname-author">
+
+                        <b>{{post.user.name}}</b>
+
+                        <p class="status">
+                            Блогер
+                        </p>
+
+
+                    </div>
+                    <img ng-if="!post.user.avatar" class="avatar" src="http://ufland.moy.su/camera_a.gif">
+                    <img ng-if="post.user.avatar" class="avatar" ng-src="{{post.user.avatar}}">
+                </div>
+
+                <div class="card-body diary">
+                    <div class="card--header">
+                    </div>
+                    <div class="card-text">
+                        <ng-bind-html ng-bind-html="post.message"></ng-bind-html>
+                    </div>
+                    <div class="card-bottom">
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

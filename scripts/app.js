@@ -10,7 +10,7 @@ var TemplatePrefix = 'views/';
 // Declare ngRoute as a dependency. http://docs.angularjs.org/api/ngRoute
 // Then configure the $routeProvider by defining the routes.
 
-angular.module('angularjsSimpleWebsiteApp', ['ngRoute'])
+angular.module('angularjsSimpleWebsiteApp', ['ngRoute', 'ngSanitize'])
 
   .config(function ($routeProvider) {
     // register the routes and the templates

@@ -1,29 +1,24 @@
 'use strict';
 
 angular.module('angularjsSimpleWebsiteApp')
-    .controller('DashboardCtrl', function ($scope, $http, $location) {
-        $scope.diary = "";
+    .controller('DashboardCtrl', function ($scope, $http, $location, $routeParams, api) {
+        $scope.diary = [];
+        $scope.pagintation = [];
+        $scope.cPage = ($routeParams.page) ? Number($routeParams.page) : 1;
         let init = () => {
-            console.log($scope.email, $scope.password)
-            $http({
-                method: 'GET',
-                url: 'http://laraveldiary.1123875-cc97019.tw1.ru/api/dashboard/1',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem("jwt")}`
-                }
-            }).then(function successCallback(response) {
+            api.getDashboard($scope.cPage).then(function successCallback(response) {
+                console.log(response.data.d)
                 if (response.data.d) {
                     $scope.diary = response.data.d;
+                    $scope.pagintation = response.data.p;
                 } else {
                     localStorage.setItem("jwt", "");
                     $location.path("login")
                 }
-
-            }, function errorCallback(response) {
-                console.log(response)
-
+            }, function (error) {
+                console.log(error);
             });
+
         };
         init();
     });

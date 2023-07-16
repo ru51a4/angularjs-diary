@@ -21,7 +21,7 @@ $(function () {
     /*
      * HTML to be created:
 <li ng-class="{active: (locationPath=='/about')}"><a href="#/about">About</a></li>
-    */
+  */}
 
 
-  });
+});

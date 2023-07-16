@@ -1,7 +1,7 @@
 <div ng-controller="DashboardCtrl">
   <div class="row">
     <div class="d-flex flex-column justify-content-start dashboard">
-      <a style="cursor:pointer;" ng-repeat="d in diary">
+      <a style="cursor:pointer;" ng-repeat="d in diary" href="#diary/{{d.id}}">
         <div class="col-12 card d-flex flex-row">
           <div class="card-avatar d-flex flex-column justify-content-start">
             <div class="nickname nickname-author">
@@ -24,5 +24,26 @@
         </div>
       </a>
     </div>
+  </div>
+
+  <div class="row mt-4">
+    <nav aria-label="...">
+      <ul class="pagination d-flex justify-content-end pagination-sm">
+
+        <a ng-if="(cPage - 1) >= 1" style="cursor: pointer" href="#dashboard/{{cPage-1}}">
+          <li class="page-item" aria-current="page">
+            <span class="page-link">prev</span>
+          </li>
+        </a>
+        <li class="page-item mx-2 active" aria-current="page">
+          <span class="page-link">{{cPage}}</span>
+        </li>
+        <a ng-if="(cPage + 1) <= pagintation" style="cursor: pointer" href="#dashboard/{{cPage+1}}">
+          <li class="page-item" aria-current="page">
+            <span class="page-link">next</span>
+          </li>
+        </a>
+      </ul>
+    </nav>
   </div>
 </div>
