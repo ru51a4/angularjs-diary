@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularjsSimpleWebsiteApp')
+$app
     .controller('LoginCtrl', function ($scope, $http, $location, api) {
         $scope.email = "";
         $scope.password = "";

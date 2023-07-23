@@ -1,5 +1,5 @@
 
-angular.module('angularjsSimpleWebsiteApp').factory('api', function ($http, $location) {
+angular.module('angularjsSimpleWebsiteApp').factory('api', function ($http, $location, $q) {
     return {
         getDashboard: (page) => {
             return $http({
@@ -32,23 +32,27 @@ angular.module('angularjsSimpleWebsiteApp').factory('api', function ($http, $loc
             })
         },
         checkAuth: () => {
-            $http({
+
+            return $http({
                 method: 'POST',
                 url: `http://laraveldiary.1123875-cc97019.tw1.ru/api/get_user`,
                 data: {
                     token: localStorage.getItem("jwt")
                 }
-            }).then(function successCallback(response) {
+            }).then((response) => {
                 if (response.data.user) {
-                    $location.path("/dashboard");
+                    return $q.reject('auth-success');
                 } else {
                     localStorage.removeItem("jwt")
+                    return true;
                 }
 
             }, function () {
 
             });
+
         }
+
 
     };
 })

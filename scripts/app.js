@@ -10,20 +10,40 @@ var TemplatePrefix = 'views/';
 // Declare ngRoute as a dependency. http://docs.angularjs.org/api/ngRoute
 // Then configure the $routeProvider by defining the routes.
 
-angular.module('angularjsSimpleWebsiteApp', ['ngRoute', 'ngSanitize'])
+$app
 
   .config(function ($routeProvider) {
     // register the routes and the templates
     // http://docs.angularjs.org/api/ngRoute.$routeProvider
     for (var path in Pages) {
       var template = Pages[path][0];
-      $routeProvider.when(path, { templateUrl: TemplatePrefix + template });
+      console.log({ path })
+      if (path == '/login' || path == "/") {
+        $routeProvider.when(path, {
+          templateUrl: TemplatePrefix + template, resolve: {
+            "Auth": function (api) { return api.checkAuth(); },
+          }
+        });
+
+      } else {
+        $routeProvider.when(path, {
+          templateUrl: TemplatePrefix + template
+        });
+      }
     }
     // the default route
     $routeProvider
       .otherwise({
         redirectTo: '/'
       });
+  }).run(function ($rootScope, $location) {
+    //If the route change failed due to authentication error, redirect them out
+    $rootScope.$on('$routeChangeError', function (event, current, previous, rejection) {
+      console.log(rejection)
+      if (rejection === 'auth-success') {
+        $location.path('/dashboard');
+      }
+    })
   })
   ;
 
